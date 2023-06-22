@@ -1,7 +1,8 @@
 // import { query } from "@/lib/db";
 import { query } from "../../lib/db"; // Importing the query function from the local db library
+import cors from 'cors';
 
-export default async function handler(req, res) {
+export default cors()(async function handler(req, res) {
   let message; // Variable to store the response message
 
   if (req.method === "GET") {
@@ -79,4 +80,4 @@ export default async function handler(req, res) {
       .status(200)
       .json({ response: { message: message, product_id: productId } }); // Sending the response message and the deleted product ID as a JSON response
   }
-}
+})
