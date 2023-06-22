@@ -1,11 +1,21 @@
 import mysql from "mysql2/promise";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export async function query({ query, values = [] }) {
   // PlanetScale;
-  const dbconnection = await mysql.createConnection(
-    process.env.MYSQL_DATABASE_URL
-  );
+  // const dbconnection = await mysql.createConnection(
+  //   process.env.MYSQL_DATABASE_URL,
+  // );
 
+  const dbconnection = await mysql.createConnection({
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
+  });
+  
   //Digital ocean ubuntu
   // const dbconnection = await mysql.createConnection({
   //   host: process.env.MYSQL_HOST,
